@@ -13,6 +13,13 @@ contract Invoice {
     uint quantity;
     uint amount;
     string account_number;
+    string pdr_number;
+    string user;
+    string hash_document;
+    string current_date;
+    enum energy_type { ELECTRICITY, GAS, WATER }
+    enum meter_code { kw, smc, l }
+    uint credit_balance;
 
     /**
      * @dev Store value in variable
@@ -22,12 +29,23 @@ contract Invoice {
         uint256 num,
         uint qty,
         uint amt,
-        string memory acc
+        string memory acc,
+        string memory pdr,
+        string memory hash_doc,
+        string memory today,
+        energy_type energy,
+        meter_code meter,
+        uint balance
         ) public {
         number = num;
         quantity = qty;
         amount = amt;
-        account_number = acc;
+        user = string.concat(acc, '-', pdr);
+        hash_document = hash_doc;
+        current_date = today;
+        energy = energy;
+        meter = meter;
+        credit_balance = balance;
     }
 
     /**
